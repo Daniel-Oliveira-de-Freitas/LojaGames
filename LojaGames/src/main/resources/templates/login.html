@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewpot" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<title>Login</title>
+<meta name="author" content="Daniel"/>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+<style>
+body {
+        background-image: url(img/login.jpg);
+        margin: 0;
+        padding: 0;
+    }
+	
+
+.container {
+	position: absolute;
+	width: 413px;
+	height: 324px;
+	left: 100px;
+	top: 250px;
+	text-shadow: black 2px -1px;
+}
+
+.form-signin {
+	position: absolute;
+	width: 413px;
+	height: 324px;
+	left: 200px;
+	top: 130px;
+	border-radius: 10px;
+}
+
+.btn {
+	background: #47bfff;
+	border: 2px solid black;
+	padding: 10px 8px;
+	color: white;
+	width: 73%;
+	font-size: 20px;
+	cursor: pointer;
+	padding-left: 10px;
+	border-radius: 8px;
+}
+
+.btn:hover {
+	color: black;
+	background: #289e9d;
+	border: 2px solid #587373;
+}
+
+.form-control {
+	max-width: 300px;
+	background: white;
+	border-radius: 5px ; 
+	padding: 8px 6px;
+	display: block;
+	box-shadow: skyblue;
+	width: 100%;
+	transition: border ease-in-out .5s;
+	border: 1px solid #26282D;
+}
+
+
+
+ nav {height: 100px;} 
+ a{cursor: pointer;font-weight:bold; font-size: 14px;} 
+</style>
+
+<body>
+
+
+	<header>
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:black; ">
+			<a class="navbar-brand" href="#"> 
+			   <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="nav-item nav-link" th:href="@{/}">Home</a> 
+				<a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Cliente</a> 
+				<a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+				<a class="nav-item nav-link" th:href="@{login}">Login</a> 				
+				<form th:action="@{/logout}" method="post">
+				<button class="nav-item nav-link btn-danger" type="submit" >Sair</button>
+				</form>
+			</div>
+
+		</nav>
+
+	</header>
+	
+	
+	<div class="container">
+		<form class="form-signin" method="post" th:object="${user}" th:action="@{/login}">
+			<h1 class="form-signin-heading" style="color:#ffffff ">Login</h1>
+			<p>
+				<label for="username" class="sr-only">Nome de Usuario</label> <input
+					type="text" id="username" name="username" class="form-control" th:field="*{email}"
+					placeholder="Nome de Usuario" required autofocus>
+			</p> 
+			<p>
+				<label for="password" class="sr-only">Senha de Usuario</label> <input
+					type="password" id="password" name="password" class="form-control" th:field="*{senha}"
+					placeholder="Senha de Usuario" required autofocus>
+			</p>
+			<input name="_csrf" type="hidden"
+				value="b16dfef1-6166-4a07-8b12-90bfa76223a6" />
+			<button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color:#80d8ff ">Login</button>
+		</form>
+	</div>
+	
+	
+	
+	<script src="/webjars/jquery-3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Compra</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    body {
+        background-image: url(img/login.jpg);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 40px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        color: white;
+    }
+
+    .base {
+        background-color: none;
+        opacity: 1;
+        width: 500px;
+        height: 130px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        bottom: 79%;
+    }
+
+    .teste {
+        display: flex;
+        background-color: #292d34;
+        width: 200px;
+        margin-left: 5px;
+        margin-top: 10px;
+        padding: 100px;
+        justify-content: space-around;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-width: 274px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+    }
+
+    .contents{
+        padding-bottom: 14px;
+        max-width: 300px;
+    }
+
+    .btn {
+        background: #47bfff;
+        border: 2px solid black;
+        padding: 10px 8px;
+        color: white;
+        width: 80%;
+        font-size: 20px;
+        cursor: pointer;
+        padding-left: 10px;
+        border-radius: 8px;
+    }
+
+    .btn:hover {
+        color: white;
+        background: #289e9d;
+        border: 2px solid #000000;
+    }
+
+    .form-select {
+        max-width: 300px;
+        background: white;
+        border-radius: 5px;
+        padding: 8px 6px;
+        width: 105%;
+        transition: border ease-in-out .5s;
+        border: 1px solid #26282D;
+    }
+
+    .texto {
+        font-size: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        color: white;
+    }
+
+    .camposTexto{
+    max-width: 300px;
+    background: white;
+    border-radius: 5px;
+    padding: 8px 6px;
+    display: block;
+    box-shadow: skyblue;
+    width: 100%;
+    transition: border ease-in-out .5s;
+    border: 1px solid #26282D;
+    }
+
+</style>
+<body>
+<div class="teste">
+    <div class="base">
+        <h1>Tela de compra de jogos</h1>
+    </div>
+    <form method="post" action="/newCompra" th:object="${compra}">
+    <div class = "contents">
+
+        <label class="texto">Nome do Jogo</label>
+        <input type="text" class= "camposTexto" th:field="*{nome}"/>
+      
+        <label class="texto">Data da compra</label>
+        <input type="text" class= "camposTexto" th:field="*{data}"/>
+        
+        <label class="texto">Preco da compra</label>
+        <input type="text" class= "camposTexto" th:field="*{preco}"/>
+
+        <label class="texto"> Pagamento</label>
+		<select id="disabledSelect" class="form-select"  th:field="*{pagamento}">
+        <option th:each="pagamento : ${T(com.grupo3.Model.enums.Pagamento).values}" th:value="${pagamento}" th:text="${pagamento}"></option>
+        </select>
+
+    </div>
+    <div>
+            <input class="btn" type="submit"  value="Concluir compra"></input>
+    </div>
+    </form>
+</div>
+</body>
+
+</html>

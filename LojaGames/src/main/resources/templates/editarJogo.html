@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Jogo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+      body {
+        background-image: url(img/login.jpg);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 40px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        color: white;
+    }
+
+    .base {
+        background-color: none;
+        opacity: 1;
+        width: 500px;
+        height: 130px;
+      
+    }
+
+    .teste {
+        display: flex;
+        border-radius: 10px;
+    }
+
+    .contents{
+        padding-bottom: 14px;
+        max-width: 300px;
+    }
+
+    .btn {
+        background: #47bfff;
+        border: 2px solid black;
+        padding: 10px 8px;
+        color: white;
+        width: 80%;
+        font-size: 20px;
+        cursor: pointer;
+        padding-left: 10px;
+        border-radius: 8px;
+    }
+
+    .btn:hover {
+        color: white;
+        background: #289e9d;
+        border: 2px solid #587373;
+    }
+
+    .form-select {
+        max-width: 300px;
+        background: white;
+        border-radius: 5px;
+        padding: 8px 6px;
+        width: 150%;
+        transition: border ease-in-out .5s;
+        border: 1px solid #26282D;
+    }
+
+    .texto {
+        font-size: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        color: white;
+    }
+
+    .camposTexto{
+    background: white;
+    border-radius: 5px;
+    padding: 8px 6px;
+    display: block;
+    box-shadow: skyblue;
+    width: 150%;
+    transition: border ease-in-out .5s;
+    border: 1px solid #26282D;
+    }
+
+</style>
+
+
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black ">
+            <a class="navbar-brand" href="#"> 
+               <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMobile">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+                <a class="nav-item nav-link" th:href="@{/}">Home</a> 
+                <a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Usuario</a> 
+                <a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+                <a class="nav-item nav-link" th:href="@{login}">Login</a> 
+                <a class="nav-item nav-link btn-danger">Sair</a>
+        
+            </div>
+
+        </nav>
+
+    </header>
+
+<div class="teste d-flex justify-content-center">
+
+    <form method="post" action="/editar-jogo" th:object="${jogo}">
+
+    <div class = "contents">
+
+        <label class="texto">Nome do Jogo</label>
+        <input type="text" class= "camposTexto"  value ="${jogo.nome}" th:field="*{nome}" maxlength="100" />
+      
+        <label class="texto">Descrição</label>
+        <input type="text" class= "camposTexto"  th:field="*{descricao}" maxlength="255"/>
+
+        <label class="texto">Genêro</label>
+        <input type="text" class= "camposTexto" th:field="*{genero}" maxlength="100"/>
+
+        <label class="texto">Desenvolvedor</label>
+        <input type="text" class= "camposTexto"  th:field="*{desenvolvedor}" maxlength="50"/>
+
+        <label class="texto"> Plataforma</label>
+        <select id="disabledSelect" class="form-select"  th:field="*{plataforma}">
+        <option th:each="plataforma : ${T(com.grupo3.Model.enums.Plataforma).values}" th:value="${plataforma}" th:text="${plataforma}"></option>
+        </select>
+        
+        <label class="texto">Data de lançamento</label>
+        <input type="date" class= "camposTexto"  th:field="*{data}"/>
+
+        <label class="texto">Preço</label>
+        <input type="number" class= "camposTexto" th:field="*{preco}"/>
+
+    </div>
+    <div class= "d-flex justify-content-center">
+         <input class="btn" type="submit"  value="Cadastrar"></input>
+    </div>
+    </form>
+ 
+
+</div>
+</body>
+
+</html>

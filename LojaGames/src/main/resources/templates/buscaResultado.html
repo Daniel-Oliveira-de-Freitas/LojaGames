@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+ <title>Buscar Jogo</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+
+<body>
+		<header>
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#80d8ff ">
+			<a class="navbar-brand" href="#"> 
+			   <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="nav-item nav-link" th:href="@{/}">Home</a> 
+				<a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Cliente</a> 
+				<a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+				<a class="nav-item nav-link" th:href="@{login}">Login</a> 				
+				<form th:action="@{/logout}" method="post">
+				<button class="nav-item nav-link btn-danger" type="submit" >Sair</button>
+				</form>
+			</div>
+
+		</nav>
+
+	</header>
+  
+  	<div class="container">
+		<div id="alerta" class="alert alert-danger alert-dismissible fade show" th:if="${!#strings.isEmpty(msgExclusao)}">
+			<a type="button" class="close" data-dismiss="alert" aria-label="Fechar" >X</a>
+						<strong>O JOGO FOI REMOVIDO COM SUCESSO!</strong>
+				</div>
+	</div>
+  
+	 <div class="containerAux">
+                <div class="row">
+                    <div class="col">
+                          <table class="table vertical-align: middle">
+                <thead>
+                    <tr>
+                    	<th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descricao</th>
+                        <th scope="col">Genero</th>
+                        <th scope="col">Plataforma</th>
+                        <th scope="col">Data de lançamento</th>
+                        <th scope="col">Desenvolvedor</th>
+                        <th scope="col">Preço</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="list : ${nomeJogos}">
+                        <td th:text = "${list.id}"/>
+                        <td th:text = "${list.nome}"/>
+                        <td  class="align-top" th:text = "${list.descricao}"/>
+                        <td th:text = "${list.genero}"/>
+                        <td th:text = "${list.data}"/>
+                        <td th:text = "${list.desenvolvedor}"/>
+                        <td th:text = "${list.preco}"/>
+                        <td><a type="button" th:href="@{/editarJogoAdmin(id=${list.id})}" class="btn btn-outline-danger my-2 my-sm-0 btn-sm">Editar</a>
+                        <a type="button" th:href="@{/excluir-jogo(id=${list.id})}" class="btn btn-outline-danger my-2 my-sm-0 btn-sm">Excluir</a></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+                    </div>
+                </div>
+        </div>
+        <div class="container">
+        <a th:href="@{listarJogos}" class="btn btn-primary">VOLTAR</a>
+        </div>
+	<br><br>
+	
+</body>
+</html>

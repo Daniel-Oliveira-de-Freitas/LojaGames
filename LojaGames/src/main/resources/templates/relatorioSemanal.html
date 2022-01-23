@@ -1,0 +1,203 @@
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório semanal dos jogos vendidos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+.container-fluid{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* classes Auxiliares */
+.containerAux {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2% 2%;
+}
+
+.center {
+	text-align: center;
+	color: #fff;
+	font-family: 'Open Sans', serif;
+	font-weight: bold;
+	font-size: 3em;
+}
+
+.pesquisa{background-color: #9b59b6; color: #fff; height: 38px; }
+
+.title {
+	font-size: 1.3em;
+	color: #fff;
+}
+.card-title{
+	text-transform: uppercase;
+	font-family: 'Roboto', serif;
+	font-weight: normal;
+}
+.titulo{
+	font-family: 'Roboto', serif;
+	text-transform: uppercase;
+	font-size: 1.7em;
+	margin-top: 40px;
+}
+
+.navbar a {
+	text-decoration: none;
+	color: #fff;
+	font-family: 'Open Sans', serif;
+	font-weight: bold;
+	transition: 0.3s;
+	font-size: 1em;
+}
+.navbar-toggler{
+	background-color: rgba(255,255,255,0.8);
+}
+.navbar a:hover {
+	color: #6D214F
+}
+
+#close {
+	color: #fff;
+}
+
+#close:hover {
+	border: 1px solid #d63031;
+	border-radius: 8%;
+	color: #d63031;
+}
+
+/*Formatação Labels */
+.lbl{font-size: 1.2em; font-family: 'Open Sans', serif; font-weight: normal;}
+
+
+.bt{
+	background: #fff;
+	color: #8e44ad;
+	border: 1px solid #8e44ad;
+	border-radius: 6px;
+	padding: 7px;
+	transition: 0.5s;
+}
+.bt:hover{color: #fff; background: #8e44ad;}
+
+/* Responsividade */
+@media screen and(max-width: 798px) {
+	.navbar li {
+		width: 100%;
+		display: block;
+	}
+	.teste{
+		margin-left: 5%;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.search .pesquisa{font-size: 0.8em; font-weight: normal;}
+	td{display: inline-block;}
+	tr{display: block;}
+	th{display: inline-block;}
+	thead{display: inline-block;}
+	.table{display: inline-block;}
+	section.secao{
+	background-position: center;
+	}
+	.title-bg{
+		font-size: 2em;
+	}
+	.navbar li {
+		width: 100%;
+		display: block; 
+	}
+	
+	#close{ 
+	border: none;
+	}
+	
+	#close:hover{
+	
+	border: 1px solid #d63031;
+	border-radius: 100px;
+	}
+	.btn{
+		width: 100%;
+		padding: 10px;
+		font-size: 0.8em;
+	}
+	
+}
+</style>
+<body>
+	<header>
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#80d8ff ">
+			<a class="navbar-brand" href="#"> 
+			   <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="nav-item nav-link" th:href="@{/}">Home</a> 
+				<a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Cliente</a> 
+				<a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+				<a class="nav-item nav-link" th:href="@{login}">Login</a> 				
+				<form th:action="@{/logout}" method="post">
+				<button class="nav-item nav-link btn-danger" type="submit" >Sair</button>
+				</form>
+			</div>
+
+		</nav>
+
+	</header>
+    <div class="d-flex justify-content-center">
+      <h1>Tela Relatório de Vendas Semanal</h1>
+    </div>
+    
+  <div class="table-responsive">
+      <form method="post"  action="/listarCompra" th:object="${compra}">
+        <div class = "contents">
+            
+            <table class="table vertical-align: middle">
+                <thead>
+                    <tr>
+                    	<th scope="col">Quantidade de venda de jogos por gênero</th>
+                        <th scope="col">Quantidade de venda de jogos por plataforma</th>
+                        <th scope="col">Quantidade de venda de jogos por desenvolvedor</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="list : ${allCompra}">
+                      <td th:text = "${list.vendagenero}"/>
+                        <td th:text = "${list.vendaplataforma}"/>
+                        <td th:text = "${list.vendadesenvolvedor}"/>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+    </div>
+    <div class="d-flex justify-content-center">
+			<ul class="nav nav-pills">
+				<li style="background-color: #9b59b6; margin-left: 15px; border-radius: 200px; " class="nav-item" 
+				th:each="i : ${#numbers.sequence(1,allCompra.totalPages)}" > 
+				<a style="color: #fff;" th:text="${i}" th:href="@{/searchTodos(page=${i})}" class="nav-link" ></a></li>
+			</ul>
+</div>
+    
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewpot" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<title>Home</title>
+<meta name="author" content="Daniel"/>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+
+<style>
+body {
+        background-image: url(img/home.jpg);
+        margin: 0;
+        padding: 0;
+    }
+    
+     h1 {
+     
+        font-family:cursive;
+        font-style: italic;
+		font-weight: lighter;
+		font-size: 70px;
+        text-align: center;
+        color: black;
+        text-shadow: blue 4px -2px;
+        left: 100px;
+    }
+
+.btnPesquisaCliente{
+
+position: absolute;
+width: 143px;
+height: 32px;
+left: 620px;
+top: 103px;
+
+background: #47BFFF;
+border-radius: 8px;
+
+}
+.Pesquisar Jogo {
+
+
+position: absolute;
+width: 103px;
+height: 48px;
+left: 532px;
+top: 257px;
+
+font-family: Rhodium Libre;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 24px;
+text-align: center;
+
+color: #000000;
+
+}
+
+.btn_PesquisaJogo{
+
+
+position: absolute;
+width: 143px;
+height: 42px;
+left: 620px;
+top: 200px;
+
+background: #47BFFF;
+border-radius: 8px;
+}
+
+.Pesquisar Cliente {
+
+
+position: absolute;
+width: 121px;
+height: 48px;
+left: 523px;
+top: 210px;
+
+font-family: Rhodium Libre;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 24px;
+text-align: center;
+
+color: #000000;
+}
+
+
+.btn_CompraJogo{
+
+
+position: absolute;
+width: 143px;
+height: 32px;
+left: 620px;
+top: 294px;
+
+background: #47BFFF;
+border-radius: 8px;
+
+}
+.Comprar Jogo {
+
+
+position: absolute;
+width: 96px;
+height: 48px;
+left: 535px;
+top: 302px;
+
+font-family: Rhodium Libre;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 24px;
+text-align: center;
+
+color: #000000;
+
+}
+.neo-section {
+    position: relative;
+	height: 700;
+	width: 1200;
+}
+
+.neo-container{
+		font-family:cursive;
+font-style: italic;
+font-weight: lighter;
+font-size: 70px;
+line-height: 52px;
+        text-align: center;
+        color: black;
+        text-shadow: white 2px -1px;
+  
+
+}
+
+
+nav{height: 100px;}
+
+a{cursor: pointer;font-weight:bold; font-size: 14px;}
+
+
+</style>
+
+<body>
+
+
+	<header>
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:black ">
+			<a class="navbar-brand" href="#"> 
+			   <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="nav-item nav-link" th:href="@{/}">Home</a> 
+				<a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Cliente</a> 
+				<a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+				<a class="nav-item nav-link" th:href="@{login}">Login</a> 				
+				<form th:action="@{/logout}" method="post">
+				<button class="nav-item nav-link btn-danger" type="submit" >Sair</button>
+				</form>
+			</div>
+
+		</nav>
+
+	</header>
+	
+	<section class="neo-section">
+	
+	
+	
+	<div class="neo-container">
+		<h1>HOME</h1>
+	</div>
+	
+	<div class="botoes">
+	<div class="btnPesquisaCliente">
+		<a type="button"  class="btn btn-primary" th:href="@{listarClientes}">PESQUISAR CLIENTES</a>
+	</div>
+	
+	<div class="btn_PesquisaJogo">
+		<a class="btn btn-success" href="listarJogos" role="button">PESQUISAR JOGO</a>
+	</div>
+	
+	<div class="btn_CompraJogo">
+		<a type="button" class="btn btn-dark" th:href="listarVendasDiarias">RELATÓRIOS VENDAS</a>
+	</div>
+
+	
+
+	</div>
+	</section>
+	
+	<script src="/webjars/jquery-3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

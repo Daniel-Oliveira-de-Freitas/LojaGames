@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewpot" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<title>Lista de Clientes</title>
+<meta name="author" content="Daniel"/>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+<style>
+    .base{text-align: center;}
+    nav{height: 100px;}
+
+a{cursor: pointer;font-weight:bold; font-size: 14px;}
+</style>
+<body>
+	<header>
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:black ">
+			<a class="navbar-brand" href="#"> 
+			   <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="nav-item nav-link" th:href="@{/}">Home</a> 
+				<a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Cliente</a> 
+				<a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+				<a class="nav-item nav-link" th:href="@{login}">Login</a> 				
+				<form th:action="@{/logout}" method="post">
+				<button class="nav-item nav-link btn-danger" type="submit" >Sair</button>
+				</form>
+			</div>
+
+		</nav>
+
+	</header>
+    <div class="base">
+      <h1>Lista de Clientes</h1>
+    </div>
+    
+    <div>
+	<div class="containerAux">
+		<form action="/search-result" th:object="${cliente}" method="POST">
+			<div class="col-lg-10 offset-lg-2 offset-md-3 form-group col-md-12">
+				<div class="col-lg-10 mt-5 col-md-8 col-sm-6">
+					<div class="input-group">
+						<input type="text"  th:field="*{nome}" name="listarCliente" id="listarCliente" 
+						class="form-control" placeholder="Insira o nome do usuario para realizar a pesquisa" maxlength="100">
+							<div class="input-group-prepend">
+							<button type="submit" class="btn pesquisa"><i class="fas fa-search"></i> BUSCAR</button>
+							</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+    
+<div>
+  <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}" >
+   
+  </form>
+   <a type="button" class="btn btn-outline-success" href="listarJogos" >PESQUISAR JOGO</a>
+  <div class="table-responsive">
+      <form method="post"  action="/cadastroPessoa" th:object="${pessoa}">
+        <div class = "contents" style="background-color:#80d8ff  ">
+            
+            <table class="table vertical-align: middle">
+                <thead>
+                    <tr>
+                    	<th scope="col"> Id</th>
+                        <th scope="col"> Nome</th>
+                        <th scope="col"> Email</th>
+                        <th scope="col"> Endereço</th>
+                        <th scope="col"> Data de Nascimento</th>
+                        <th scope="col"> Plataforma</th>
+                        <th scope="col"> Genero de Preferência</th>
+                
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="lista: ${allCliente}">
+                    	<td th:text = "${lista.id}"/>
+                        <td th:text = "${lista.nome}"/>
+                        <td  class="align-top" th:text = "${lista.email}"/>
+                        <td th:text = "${lista.endereco}"/>
+                        <td th:text = "${lista.dataNascimento}"/>
+                        <td th:text = "${lista.generoPreferencia}"/>
+                        <td th:text = "${lista.plataforma}"/>
+                        <td><a type="button" th:href="@{/editarCliente(id=${lista.id})}" class="btn btn-outline-warning my-2 my-sm-0 btn-sm">Editar</a></td>
+                        <td><a type="button" th:href="@{/excluir-cliente(id=${lista.id})}" class="btn btn-outline-danger my-2 my-sm-0 btn-sm">Excluir</a>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+    </div>
+    <div class="d-flex justify-content-center">
+			<ul class="nav nav-pills">
+				<li style="background-color: black; margin-left: 15px; border-radius: 200px; " class="nav-item" 
+				th:each="i : ${#numbers.sequence(1,allCliente.totalPages)}" > 
+				<a style="color: #fff;" th:text="${i}" th:href="@{/listarClientes(page=${i})}" class="nav-link" ></a></li>
+			</ul>
+</div>
+    
+</body>
+
+</html>

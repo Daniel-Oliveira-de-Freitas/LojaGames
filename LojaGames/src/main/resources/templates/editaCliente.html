@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewpot" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<title>Editar Cliente</title>
+<meta name="author" content="Daniel"/>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+<style>
+body {
+        background-image: url(img/cadCliente.jpg);
+        margin: 0;
+        padding: 0;
+    }
+.EditarClientes{    
+    position: absolute;
+width: 785px;
+height: 500px;
+left: 209px;
+top: 150px;
+border: 1px solid black;
+background-color:#836FFF	;
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 91px;
+text-align: center;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+}    
+.CampoText_Email{
+
+
+position: absolute;
+width: 232px;
+height: 31px;
+left: 244px;
+top: 334px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+box-sizing: border-box;
+
+}
+.btn_Cadastro {
+
+color: white;
+position: absolute;
+width: 215px;
+height: 53px;
+left: 490px;
+top: 589px;
+
+background: #47BFFF;
+border-radius: 8px;
+}
+
+.btn_Cadastro:hover {
+	color: black;
+	background: #289e9d;
+	border: 2px solid #587373;
+}
+
+.Cadastrar{
+
+
+position: absolute;
+width: 208px;
+height: 27px;
+left: 490px;
+top: 593px;
+border: 1px solid black;
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 36px;
+line-height: 42px;
+text-align: center;
+
+color: #FFFFFF;
+
+}
+
+.CampoText_Nome{
+
+
+position: absolute;
+width: 232px;
+height: 31px;
+left: 244px;
+top: 240px;
+border: 1px solid black;
+background: #FFFFFF;
+border: 1px solid black;
+box-sizing: border-box;
+}
+
+.Nome{
+
+
+position: absolute;
+width: 54px;
+height: 23px;
+left: 248px;
+top: 215px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+}
+
+.CampoText_Senha{
+
+border: 1px solid black;
+position: absolute;
+width: 235px;
+height: 31px;
+left: 244px;
+top: 423px;
+
+background: #F5F5F5;
+border: 1px solid black;
+box-sizing: border-box;
+}
+
+.Email{
+
+
+position: absolute;
+width: 94px;
+height: 15px;
+left: 249px;
+top: 310px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+
+}
+
+.Senha{
+
+
+position: absolute;
+width: 56px;
+height: 23px;
+left: 244px;
+top: 400px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+
+}
+
+.CampoText_ConfirmaSenha{
+
+
+position: absolute;
+width: 235px;
+height: 31px;
+left: 244px;
+top: 501px;
+
+background: #F5F5F5;
+border: 1px solid black;
+box-sizing: border-box;
+}
+
+.ConfirmarSenha{
+
+
+position: absolute;
+width: 148px;
+height: 23px;
+left: 244px;
+top: 475px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+}
+
+.DatadeNascimento{
+
+
+position: absolute;
+width: 197px;
+height: 29px;
+left: 728px;
+top: 309px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+}
+.CampoText_DataNasc{
+
+
+position: absolute;
+width: 232px;
+height: 31px;
+left: 723px;
+top: 334px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+box-sizing: border-box;
+}
+.CampoText_Endereco{
+
+
+position: absolute;
+width: 232px;
+height: 31px;
+left: 723px;
+top: 240px;
+
+background: #FFFFFF;
+border: 1px solid black;
+box-sizing: border-box;
+}
+
+.Endereço{
+
+
+position: absolute;
+width: 84px;
+height: 23px;
+left: 727px;
+top: 209px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+}
+
+
+.CampoText_Genero{
+
+
+position: absolute;
+width: 235px;
+height: 31px;
+left: 723px;
+top: 423px;
+
+background: #F5F5F5;
+border: 1px solid black;
+box-sizing: border-box;
+
+}
+.Generodepreferencia{
+
+
+position: absolute;
+width: 64px;
+height: 23px;
+left: 723px;
+top: 390px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+
+}
+
+.CampoText_Plataforma{
+
+
+position: absolute;
+width: 235px;
+height: 31px;
+left: 723px;
+top: 501px;
+
+background: #F5F5F5;
+border: 1px solid black;
+box-sizing: border-box;
+
+}
+.Plataforma{
+
+
+position: absolute;
+width: 100px;
+height: 23px;
+left: 723px;
+top: 475px;
+
+font-family: cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+
+color: black;
+text-shadow: 1px 2px 2px white ;
+}
+nav{height: 100px;}
+a{cursor: pointer;font-weight:bold; font-size: 14px;}
+ 
+</style>
+
+<body>
+
+
+	<header>
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black ">
+			<a class="navbar-brand" href="#"> 
+			   <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="nav-item nav-link" th:href="@{/}">Home</a> 
+				<a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Cliente</a> 
+				<a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+				<a class="nav-item nav-link" th:href="@{login}">Login</a> 				
+				<form th:action="@{/logout}" method="post">
+				<button class="nav-item nav-link btn-danger" type="submit" >Sair</button>
+				</form>
+			</div>
+
+		</nav>
+
+	</header>
+	
+	 <div class="EditarClientes">
+        <h1>Edita Cliente</h1>
+    </div>
+    <form method="post"  action="/editar-cliente" th:object="${clienteEdit}">
+   <div class = "contents">
+
+        <label class="Nome">Nome</label>
+        <input type="text" class= "CampoText_Nome" th:field="*{nome}" maxlength="100" required autofocus/>
+      
+        <label class="Email">e-mail</label>
+        <input type="email" class= "CampoText_Email" th:field="*{email}" maxlength="100" required autofocus/>
+         
+        <label class="Senha">Senha</label>
+        <input type="password" class= "CampoText_Senha" th:field="*{senha}" maxlength="100" required autofocus/>
+					
+		<label class="ConfirmarSenha">Confirmar Senha</label>
+        <input type="password" class= "CampoText_ConfirmaSenha" th:field="*{confirmarsenha}" maxlength="100" required autofocus/>
+    
+       <label class="Endereço">Endereço</label>
+        <input type="text" class= "CampoText_Endereco" th:field="*{endereco}" maxlength="100" required autofocus/>
+    
+        <label class="DatadeNascimento">Data de Nascimento</label>
+        <input type="date" class= "CampoText_DataNasc" th:field="*{dataNascimento}" required autofocus/>
+
+        <label class="Generodepreferencia">GênerodePreferência</label>
+        <input type="text" class= "CampoText_Genero"  th:field="*{generoPreferencia}" maxlength="100" required autofocus/>
+
+        <label class="Plataforma"> Plataforma</label>
+        <select id="disabledSelect" class="CampoText_Plataforma" th:field="*{plataforma}">
+        <option th:each="plataforma : ${T(com.grupo3.Model.enums.Plataforma).values}" th:value="${plataforma}" th:text="${plataforma}"></option>
+			  
+			 
+			
+        </select>
+    
+    </div>
+    
+
+    
+    <div>
+            <input class="btn_Cadastro" type="submit"  value="Cadastrar"></input>
+    </div>
+    </form>
+	
+    
+
+		
+	<script src="/webjars/jquery-3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

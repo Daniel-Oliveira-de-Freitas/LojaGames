@@ -1,0 +1,231 @@
+<!DOCTYPE html >
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Listar Jogos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+.container-fluid{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+/* classes Auxiliares */
+.containerAux {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2% 2%;
+}
+
+.center {
+	text-align: center;
+	color: #fff;
+	font-family: 'Open Sans', serif;
+	font-weight: bold;
+	font-size: 3em;
+}
+
+
+.pesquisa{background-color: #9b59b6; color: #fff; height: 38px; }
+
+.title {
+	font-size: 1.3em;
+	color: #fff;
+}
+.card-title{
+	text-transform: uppercase;
+	font-family: 'Roboto', serif;
+	font-weight: normal;
+}
+.titulo{
+	font-family: 'Roboto', serif;
+	text-transform: uppercase;
+	font-size: 1.7em;
+	margin-top: 40px;
+}
+
+.navbar a {
+	text-decoration: none;
+	color: #fff;
+	font-family: 'Open Sans', serif;
+	font-weight: bold;
+	transition: 0.3s;
+	font-size: 1em;
+}
+.navbar-toggler{
+	background-color: rgba(255,255,255,0.8);
+}
+.navbar a:hover {
+	color: #6D214F
+}
+
+#close {
+	color: #fff;
+}
+
+#close:hover {
+	border: 1px solid #d63031;
+	border-radius: 8%;
+	color: #d63031;
+}
+
+
+/*Formatação Labels */
+.lbl{font-size: 1.2em; font-family: 'Open Sans', serif; font-weight: normal;}
+
+
+.bt{
+	background: #fff;
+	color: #8e44ad;
+	border: 1px solid #8e44ad;
+	border-radius: 6px;
+	padding: 7px;
+	transition: 0.5s;
+}
+.bt:hover{color: #fff; background: #8e44ad;}
+
+/* Responsividade */
+@media screen and(max-width: 798px) {
+	.navbar li {
+		width: 100%;
+		display: block;
+	}
+	.teste{
+		margin-left: 5%;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.search .pesquisa{font-size: 0.8em; font-weight: normal;}
+	td{display: inline-block;}
+	tr{display: block;}
+	th{display: inline-block;}
+	thead{display: inline-block;}
+	.table{display: inline-block;}
+	section.secao{
+	background-position: center;
+	}
+	.title-bg{
+		font-size: 2em;
+	}
+	.navbar li {
+		width: 100%;
+		display: block; 
+	}
+	
+	#close{ 
+	border: none;
+	}
+	
+	#close:hover{
+	
+	border: 1px solid #d63031;
+	border-radius: 100px;
+	}
+	.btn{
+		width: 100%;
+		padding: 10px;
+		font-size: 0.8em;
+	}
+	
+}
+</style>
+<body>
+	<header>
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#80d8ff ">
+			<a class="navbar-brand" href="#"> 
+			   <img src="img/head-a.jpg" width="200px" height="100px"/><img src="img/head-b.jpg" width="200px" height="100px"/><img src="img/head-c.jpg" width="200px" height="100px"/><img src="img/head-d.jpg" width="200px" height="100px"/> 
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"	data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+
+				<a class="nav-item nav-link" th:href="@{/}">Home</a> 
+				<a class="nav-item nav-link" th:href="@{cadastrarCliente}">Cadastrar Cliente</a> 
+				<a class="nav-item nav-link" th:href="@{CadastrarJogo}" >Cadastrar Jogo</a>
+				<a class="nav-item nav-link" th:href="@{login}">Login</a> 				
+				<form th:action="@{/logout}" method="post">
+				<button class="nav-item nav-link btn-danger" type="submit" >Sair</button>
+				</form>
+			</div>
+
+		</nav>
+
+	</header>
+    <div class="d-flex justify-content-center">
+      <h1>Tela de Lista games</h1>
+    </div>
+    
+<div>
+	<div class="containerAux">
+		<form action="/search-result" th:object="${jogo}" method="POST">
+			<div class="col-lg-10 offset-lg-2 offset-md-3 form-group col-md-12">
+				<div class="col-lg-10 mt-5 col-md-8 col-sm-6">
+					<div class="input-group">
+						<input type="text"  th:field="*{nome}" name="listarJogos" id="listarJogos" 
+						class="form-control" placeholder="Insira o nome do jogo para realizar a pesquisa" maxlength="100">
+							<div class="input-group-prepend">
+							<button type="submit" class="btn pesquisa"><i class="fas fa-search"></i> BUSCAR</button>
+							</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+  <div class="table-responsive">
+      <form method="post"  action="/listarJogos" th:object="${jogo}">
+        <div class = "contents">
+            
+            <table class="table vertical-align: middle">
+                <thead>
+                    <tr>
+                    	<th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descricao</th>
+                        <th scope="col">Genero</th>
+                        <th scope="col">Plataforma</th>
+                        <th scope="col">Data de lançamento</th>
+                        <th scope="col">Desenvolvedor</th>
+                        <th scope="col">Preço</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="list : ${allJogo}">
+                      <td th:text = "${list.id}"/>
+                        <td th:text = "${list.nome}"/>
+                        <td  class="align-top" style="word-wrap: break-word" th:text = "${list.descricao}"/>
+                        <td th:text = "${list.genero}"/>
+                        <td th:text = "${list.data}"/>
+                        <td th:text = "${list.desenvolvedor}"/>
+                        <td th:text = "${list.preco}"/>
+                        <td><button type="submit"  class="btn btn-outline-danger my-2 my-sm-0 btn-sm">Comprar</button></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+    </div>
+    <div class="d-flex justify-content-center">
+			<ul class="nav nav-pills">
+				<li style="background-color: #9b59b6; margin-left: 15px; border-radius: 200px; " class="nav-item" 
+				th:each="i : ${#numbers.sequence(1,allJogo.totalPages)}" > 
+				<a style="color: #fff;" th:text="${i}" th:href="@{/listarJogos(page=${i})}" class="nav-link" ></a></li>
+			</ul>
+</div>
+    
+</body>
+
+</html>
